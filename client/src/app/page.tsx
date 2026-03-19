@@ -1,11 +1,23 @@
-export default function Home() {
+# Stop current servers (Ctrl+C in terminals)
+# Then restart:
+cd server && npm run dev  # Backend
+cd client && npm run dev  # Frontendimport Image from "next/image";
+
+export default function LandingPage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Welcome to Virtual Concierge
-        </p>
-      </div>
+    <main className="bg-gray-50">
+      <section className="relative h-screen flex items-center justify-center bg-white">
+        <div className="text-center px-6 md:px-0">
+          <h1 className="text-5xl md:text-6xl font-bold mb-4">Your AI Concierge for Every Property</h1>
+          <p className="text-gray-600 mb-6 text-lg md:text-xl">
+            Automate tenants, maintenance, and communication with AI.
+          </p>
+          <a href="/signup" className="px-8 py-4 bg-black text-white rounded-lg font-semibold hover:bg-gray-900 transition">Get Started</a>
+        </div>
+        <div className="absolute right-0 bottom-0 hidden md:block">
+          <Image src="/hero-ai-home.png" width={600} height={400} alt="AI Concierge Illustration" />
+        </div>
+      </section>
     </main>
-  )
+  );
 }

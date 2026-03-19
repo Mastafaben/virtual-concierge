@@ -6,8 +6,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model User {
@@ -19,8 +19,6 @@ model User {
   updatedAt DateTime @updatedAt
 
   properties Property[]
-  requests   Request[]
-  messages   Message[]
 }
 
 model Property {
@@ -36,25 +34,19 @@ model Property {
 
 model Request {
   id          Int      @id @default(autoincrement())
-  title       String
   description String
-  status      String   @default("pending") // pending, in_progress, completed
-  priority    String   @default("medium") // low, medium, high
+  type        String
+  tenantId    Int
   propertyId  Int
   property    Property @relation(fields: [propertyId], references: [id])
-  userId      Int
-  user        User     @relation(fields: [userId], references: [id])
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-
-  messages    Message[]
 }
 
 model Message {
   id        Int      @id @default(autoincrement())
   content   String
-  sender    String   // 'user' or 'ai'
-  requestId Int
-  request   Request  @relation(fields: [requestId], references: [id])
+  senderId  String
+  receiverId String
   createdAt DateTime @default(now())
 }
